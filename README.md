@@ -4,4 +4,5 @@
 
 #### 算法目录
 
+* 181227 FisherYatesShuffle Fisher-Yates shuffle
 * 181227 ReservoirSampling 蓄水池算法
