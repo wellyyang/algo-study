@@ -18,6 +18,7 @@ public class FisherYatesShuffle<T> {
 	public T[] shuffle(T[] arr) {
 		int length = arr.length;
 		for (int i = length - 1; i >= 1; i--) {
+			// [0, i + 1)
 			int j = r.nextInt(i + 1);
 			if (i != j) {
 				T temp = arr[i];
