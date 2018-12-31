@@ -1,11 +1,14 @@
 package com.welly.algo.shuffle;
 
-import java.util.Arrays;
+import static org.junit.Assert.assertThat;
+
 import java.util.stream.IntStream;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.matchers.EqualsWithDelta;
 
+import com.welly.algo.DistributionStat;
 
 /**
  * @author yangchuan02
@@ -15,33 +18,38 @@ public class FisherYatesShuffleTest {
 
 	private static final int count = 10;
 
+	private static final int loop = 1000_0000;
+
+	private static final double delta = loop / count * 0.005;
+
 	private static FisherYatesShuffle<Integer> s = new FisherYatesShuffle<>();
 
 	private static Integer[] arr;
 
-	private static int[][] stat = new int[count][count];
+	private DistributionStat<Integer> stat;
 
-	@BeforeClass
-	public static void setUp() {
-		for (int i = 0; i < stat.length; i++) {
-			stat[i] = new int[count];
-			Arrays.fill(stat[i], 0);
-		}
+	@Before
+	public void setUp() {
+		stat = new DistributionStat<>(count);
 	}
 
 	@Test
 	public void testShuffle() {
-		for (int i = 0; i < 10000000; i++) {
+
+		for (int i = 0; i < loop; i++) {
 			arr = IntStream.range(0, count).mapToObj(Integer::valueOf).toArray(Integer[]::new);
 			Integer[] shuffled = s.shuffle(arr);
 
 			for (int j = 0; j < shuffled.length; j++) {
-				stat[j][shuffled[j]] += 1;
+				stat.increase(shuffled[j], j);
 			}
 		}
 
-		for (int i = 0; i < stat.length; i++) {
-			System.out.println(Arrays.toString(stat[i]));
+		for (int value : stat.getStat().keySet()) {
+			for (int pos : stat.getStat().get(value).keySet()) {
+				assertThat(loop / count,
+						new EqualsWithDelta(stat.getStat().get(value).get(pos).doubleValue(), delta));
+			}
 		}
 	}
 

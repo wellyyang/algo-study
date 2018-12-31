@@ -1,6 +1,7 @@
 package com.welly.algo.sampling;
 
 import java.lang.reflect.Array;
+import java.security.SecureRandom;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
@@ -20,7 +21,7 @@ import java.util.Random;
  */
 public abstract class ReservoirSampling<T> {
 
-	private Random r = new Random();
+	private Random r = new SecureRandom();
 
 	public abstract Class<T> getTClass();
 
