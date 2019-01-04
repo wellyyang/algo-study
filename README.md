@@ -4,6 +4,7 @@
 
 #### 学习日志
 
+* 190104 一致性hash
 * 181229 链表翻转和环检测
 * 181227 FisherYatesShuffle Fisher-Yates shuffle
 * 181227 ReservoirSampling 蓄水池算法
