@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.junit.BeforeClass;
@@ -29,6 +30,14 @@ public class ConsistentHashingTest {
 	public void testGetRealNode() {
 		IntStream.range(0, 100)
 				.forEach(i -> assertTrue(realNodes.contains(hashing.getRealNode(String.valueOf(i)))));
+
+		List<String> realNodes2 = IntStream.range(100, 200)
+				.mapToObj(String::valueOf)
+				.collect(Collectors.toList());
+
+		hashing.setRealNodes(realNodes2);
+		IntStream.range(0, 100)
+				.forEach(i -> assertTrue(realNodes2.contains(hashing.getRealNode(String.valueOf(i)))));
 	}
 
 }

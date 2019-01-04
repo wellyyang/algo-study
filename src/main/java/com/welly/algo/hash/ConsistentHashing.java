@@ -21,10 +21,10 @@ import java.util.stream.IntStream;
  */
 public class ConsistentHashing {
 
-	private final List<String> realNodes;
+	private List<String> realNodes;
 
 	// 直接使用SortedMap, key为Integer来构建2**32的哈希环
-	private final SortedMap<Integer, String> hashCircle;
+	private SortedMap<Integer, String> hashCircle;
 
 	private int virtualNodesNum = 5;
 
@@ -38,27 +38,14 @@ public class ConsistentHashing {
 
 	public ConsistentHashing(List<String> realNodes, int virtualNodesNum,
 			Function<String, Integer> hashFunc) {
-		this.realNodes = Objects.requireNonNull(realNodes);
+		if (virtualNodesNum <= 0) {
+			virtualNodesNum = 1;
+		}
+
 		this.virtualNodesNum = virtualNodesNum;
 		this.hashFunc = Objects.requireNonNull(hashFunc);
 
-		this.hashCircle = new TreeMap<>();
-
-		realNodes.stream()
-				.map(this::flatMapRealNodeToVirtualNodes)
-				.forEach(this::putVirtualNodes);
-	}
-
-	private String[] flatMapRealNodeToVirtualNodes(String realNode) {
-		return IntStream.range(0, virtualNodesNum)
-				.mapToObj(i -> realNode + seperator + i)
-				.toArray(String[]::new);
-	}
-
-	private void putVirtualNodes(String[] arr) {
-		for (String vn : arr) {
-			hashCircle.put(hashFunc.apply(vn), vn);
-		}
+		setRealNodes(realNodes);
 	}
 
 	public List<String> getRealNodes() {
@@ -84,4 +71,28 @@ public class ConsistentHashing {
 		return Collections.unmodifiableSortedMap(hashCircle);
 	}
 
+	public void setRealNodes(List<String> realNodes) {
+		this.realNodes = Objects.requireNonNull(realNodes);
+		this.hashCircle = createHashCircle();
+	}
+
+	private String[] flatMapRealNodeToVirtualNodes(String realNode) {
+		return IntStream.range(0, virtualNodesNum)
+				.mapToObj(i -> realNode + seperator + i)
+				.toArray(String[]::new);
+	}
+	
+	private void putVirtualNodes(SortedMap<Integer, String> map, String[] arr) {
+		for (String vn : arr) {
+			map.put(hashFunc.apply(vn), vn);
+		}
+	}
+	
+	private SortedMap<Integer, String> createHashCircle() {
+		SortedMap<Integer, String> map = realNodes.stream()
+				.map(this::flatMapRealNodeToVirtualNodes)
+				.collect(TreeMap<Integer, String>::new, this::putVirtualNodes, TreeMap::putAll);
+		return map;
+	}
+	
 }
