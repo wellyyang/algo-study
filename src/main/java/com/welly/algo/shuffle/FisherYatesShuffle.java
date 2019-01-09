@@ -11,11 +11,11 @@ import java.util.Random;
  * @date 2018年12月27日
  * @see https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
  */
-public class FisherYatesShuffle<T> {
+public class FisherYatesShuffle {
 
 	private Random r = new Random();
 
-	public T[] shuffle(T[] arr) {
+	public <T> T[] shuffle(T[] arr) {
 		int length = arr.length;
 		for (int i = length - 1; i >= 1; i--) {
 			// [0, i + 1)
@@ -29,4 +29,18 @@ public class FisherYatesShuffle<T> {
 		return arr;
 	}
 
+	public int[] shuffle(int[] arr) {
+		int length = arr.length;
+		for (int i = length - 1; i >= 1; i--) {
+			// [0, i + 1)
+			int j = r.nextInt(i + 1);
+			if (i != j) {
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+		return arr;
+	}
+	
 }

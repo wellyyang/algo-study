@@ -22,9 +22,9 @@ public class FisherYatesShuffleTest {
 
 	private static final double delta = loop / count * 0.005;
 
-	private static FisherYatesShuffle<Integer> s = new FisherYatesShuffle<>();
+	private static FisherYatesShuffle s = new FisherYatesShuffle();
 
-	private static Integer[] arr;
+	private static int[] arr;
 
 	private DistributionStat<Integer> stat;
 
@@ -37,8 +37,8 @@ public class FisherYatesShuffleTest {
 	public void testShuffle() {
 
 		for (int i = 0; i < loop; i++) {
-			arr = IntStream.range(0, count).mapToObj(Integer::valueOf).toArray(Integer[]::new);
-			Integer[] shuffled = s.shuffle(arr);
+			arr = IntStream.range(0, count).toArray();
+			int[] shuffled = s.shuffle(arr);
 
 			for (int j = 0; j < shuffled.length; j++) {
 				stat.increase(shuffled[j], j);
