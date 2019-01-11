@@ -1,4 +1,4 @@
-package com.welly.algo.other;
+package com.welly.algo.datastruct;
 
 import java.util.HashSet;
 import java.util.Set;

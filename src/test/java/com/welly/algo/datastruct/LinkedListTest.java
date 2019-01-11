@@ -1,14 +1,16 @@
-package com.welly.algo.other;
+package com.welly.algo.datastruct;
 
-import static com.welly.algo.other.LinkedList.checkCircle;
-import static com.welly.algo.other.LinkedList.checkCircle2;
-import static com.welly.algo.other.LinkedList.reverse;
+import static com.welly.algo.datastruct.LinkedList.checkCircle;
+import static com.welly.algo.datastruct.LinkedList.checkCircle2;
+import static com.welly.algo.datastruct.LinkedList.reverse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import com.welly.algo.datastruct.Node;
 
 
 /**
