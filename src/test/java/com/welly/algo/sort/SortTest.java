@@ -1,5 +1,7 @@
 package com.welly.algo.sort;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -18,14 +20,19 @@ public class SortTest {
 	public void test() {
 		List<IIntSort> list
 				= Arrays.asList(new SelectionSort(), new InsertionSort(), new BubbleSort(), new ShellSort(),
-						new MergeSort(), new QuickSort(), new RadixSort());
+						new MergeSort(), new QuickSort(), new RadixSort(), new HeapSort());
 
 		list.forEach(s -> {
 			int[] arr = IntStream.rangeClosed(1, 20).toArray();
 			arr = new FisherYatesShuffle().shuffle(arr);
 			System.out.println("-------------  " + s.getClass().getSimpleName() + "  --------------");
 			System.out.println(Arrays.toString(arr));
-			System.out.println(Arrays.toString(s.sort(arr)));
+			int[] sortedArr = s.sort(arr);
+			System.out.println(Arrays.toString(sortedArr));
+
+			for (int i = 0; i < arr.length; i++) {
+				assertEquals(sortedArr[i], i + 1);
+			}
 		});
 	}
 

@@ -10,8 +10,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.welly.algo.datastruct.Node;
-
 
 /**
  * @author yangchuan02
@@ -26,7 +24,7 @@ public class LinkedListTest {
 		for (int i = 2; i < 5; i++) {
 			node.next = new Node<>();
 			node = node.next;
-			node.data = i;
+			node.value = i;
 		}
 
 		Node<Integer> node2 = new Node<>(4, null);
@@ -34,7 +32,7 @@ public class LinkedListTest {
 		for (int i = 3; i > 0; i--) {
 			node2.next = new Node<>();
 			node2 = node2.next;
-			node2.data = i;
+			node2.value = i;
 		}
 
 		assertEquals(head2, reverse(head));
@@ -57,7 +55,7 @@ public class LinkedListTest {
 		for (int i = 2; i < 5; i++) {
 			node.next = new Node<>();
 			node = node.next;
-			node.data = i;
+			node.value = i;
 		}
 		assertFalse(checkCircle(noCircle));
 		assertFalse(checkCircle2(noCircle));
@@ -67,7 +65,7 @@ public class LinkedListTest {
 		for (int i = 2; i < 5; i++) {
 			node2.next = new Node<>();
 			node2 = node2.next;
-			node2.data = i;
+			node2.value = i;
 		}
 		node2.next = hasCircle.next;
 		assertTrue(checkCircle(hasCircle));

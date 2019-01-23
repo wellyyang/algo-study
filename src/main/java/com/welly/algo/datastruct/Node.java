@@ -17,7 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Node<T> {
 
-	public T data;
+	public T value;
 
 	public Node<T> next;
 
@@ -28,7 +28,7 @@ public class Node<T> {
 		Node<T> node = this;
 		int i = 0;
 		while (node != null && i < 10) {
-			ret.append(node.data).append(" -> ");
+			ret.append(node.value).append(" -> ");
 			node = node.next;
 			i++;
 		}
@@ -44,7 +44,7 @@ public class Node<T> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(data);
+		return Objects.hashCode(value);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class Node<T> {
 
 		if (obj instanceof Node) {
 			Node<?> node = (Node<?>) obj;
-			return Objects.equals(data, node.data) && Objects.equals(next, node.next);
+			return Objects.equals(value, node.value) && Objects.equals(next, node.next);
 		}
 		return false;
 	}
