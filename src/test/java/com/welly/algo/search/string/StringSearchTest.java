@@ -17,7 +17,7 @@ public class StringSearchTest {
 	@Test
 	public void test() {
 		List<ISearch> list = Arrays.asList(new BF(), new RK(), new RK2(),
-				new BM(), new KMP());
+				new BM(), new KMP(), new Sunday());
 
 		String search = "1234564564567890";
 		String match = "456456";
