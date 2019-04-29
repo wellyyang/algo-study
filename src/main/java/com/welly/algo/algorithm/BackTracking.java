@@ -107,6 +107,39 @@ public class BackTracking {
 	}
 
 	/**
+	 * n个物品, 每个物品有重量和价值, 放入不超过m承重的背包中, 求放入的最大价值
+	 * 
+	 * @author yangchuan02
+	 * @date 2019年4月28日
+	 */
+	public static class Bag2 {
+
+		public int resolve(int[] items, int[] values, int maxWeight) {
+			AtomicInteger result = new AtomicInteger();
+			resolve0(0, 0, items, values, 0, maxWeight, result);
+			return result.get();
+		}
+
+		private void resolve0(int curWeight, int curValue, int[] items, int[] values,
+				int curIndex, int maxWeight, AtomicInteger result) {
+			if (items.length == curIndex || curWeight == maxWeight) {
+				if (curValue > result.get()) {
+					result.set(curValue);
+				}
+				return;
+			}
+
+			if (curWeight + items[curIndex] <= maxWeight) {
+				resolve0(curWeight + items[curIndex], curValue + values[curIndex],
+						items, values, curIndex + 1, maxWeight, result);
+			}
+
+			resolve0(curWeight, curValue, items, values, curIndex + 1, maxWeight, result);
+		}
+
+	}
+
+	/**
 	 * 给定n对括号, 输出有几种合法的组合
 	 *
 	 * @author yangchuan02
@@ -146,13 +179,18 @@ public class BackTracking {
 		System.out.println(pairs + "对括号匹配: " + l1.size() + "种");
 		System.out.println(l1);
 
-		int[] items = new int[] { 1, 2, 5, 10 };
-		int maxWeight = 14;
+		int[] items = new int[] { 2, 2, 4, 6, 3 };
+		int maxWeight = 9;
 		int max = new Bag().resolve(items, maxWeight);
 		System.out.println("从" + Arrays.toString(items) + "中选择物品放入总容量" + maxWeight + "的背包中, 最多放入" + max + "容量的物品");
 
+		int[] values = new int[] { 3, 4, 8, 9, 6 };
+		int max2 = new Bag2().resolve(items, values, maxWeight);
+		System.out.println("从重量为" + Arrays.toString(items) + "/价值为" + Arrays.toString(values)
+				+ "中选择物品放入总容量" + maxWeight + "的背包中, 最多放入" + max2 + "价值的物品");
+
 		AtomicInteger counter = new AtomicInteger();
-		int n = 14;
+		int n = 8;
 		new Queens().resolve(n, arr -> counter.incrementAndGet());
 		System.out.println(n + "个皇后有" + counter.get() + "种放置方法");
 	}
