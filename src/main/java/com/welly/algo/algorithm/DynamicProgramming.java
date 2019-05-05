@@ -153,6 +153,30 @@ public class DynamicProgramming {
 
 	}
 
+	public static class LongestAscendSub {
+
+		public int resolve(int[] nums) {
+			if (nums.length < 2) {
+				return nums.length;
+			}
+			int[] state = new int[nums.length];
+			state[0] = 1;
+
+			for (int i = 1; i < nums.length; i++) {
+				int max = 0;
+				for (int j = 0; j < i; j++) {
+					if (nums[i] > nums[j]) {
+						max = Math.max(max, state[j]);
+					}
+				}
+				state[i] = max + 1;
+			}
+
+			return IntStream.of(state).max().getAsInt();
+		}
+
+	}
+
 	public static void main(String[] args) {
 		int[] items = new int[] { 2, 2, 4, 6, 3 };
 		int maxWeight = 9;
@@ -172,10 +196,13 @@ public class DynamicProgramming {
 		int min2 = new Square().resolve(matrix2);
 		System.out.println(Arrays.deepToString(matrix) + "的最短路径长度为" + min2);
 
-		int[] coins = { 5, 3, 7 };
-		int value = 5;
+		int[] coins = { 1, 2, 5 };
+		int value = 11;
 		int min3 = new Coins().resolve(coins, value);
 		System.out.println(min3);
+
+		int[] nums = { 2, 9, 3, 6, 5, 1, 7 };
+		System.out.println(new LongestAscendSub().resolve(nums));
 	}
 
 }
