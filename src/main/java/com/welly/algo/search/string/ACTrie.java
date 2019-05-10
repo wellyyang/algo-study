@@ -1,5 +1,10 @@
 package com.welly.algo.search.string;
 
+import java.util.List;
+import java.util.TreeMap;
+
+import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie;
+
 /**
  * <pre>
  * AC自动机, 多模式匹配算法, 只需要扫描一遍主串, 即可一次性查找多个模式串. 需要对多模式串进行预处理. 适用场景, 敏感词过滤
@@ -19,6 +24,29 @@ package com.welly.algo.search.string;
  * @author yangchuan02
  * @date 2019年2月19日
  */
-public class AhoCorasickDoubleArrayTrie {
+public class ACTrie {
+
+	public static void main(String[] args) {
+		// Collect test data set
+		TreeMap<String, String> map = new TreeMap<>();
+		String[] keyArray = new String[] {
+				"hers",
+				"his",
+				"she",
+				"he"
+		};
+		for (String key : keyArray) {
+			map.put(key, key);
+		}
+		// Build an AhoCorasickDoubleArrayTrie
+		AhoCorasickDoubleArrayTrie<String> acdat = new AhoCorasickDoubleArrayTrie<>();
+		acdat.build(map);
+		// Test it
+		final String text = "uhers";
+		List<AhoCorasickDoubleArrayTrie.Hit<String>> wordList = acdat.parseText(text);
+		System.out.println(wordList);
+
+		System.out.println(acdat.matches(text));
+	}
 
 }
