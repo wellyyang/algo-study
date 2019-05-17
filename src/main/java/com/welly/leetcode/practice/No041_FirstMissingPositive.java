@@ -6,7 +6,7 @@ import java.util.BitSet;
  * @author yangchuan02
  * @date 2019年5月16日
  */
-public class No41_FirstMissingPositive {
+public class No041_FirstMissingPositive {
 
 	public int firstMissingPositive(int[] nums) {
 		BitSet bs = new BitSet(nums.length);
@@ -20,7 +20,7 @@ public class No41_FirstMissingPositive {
 	}
 
 	public static void main(String[] args) {
-		No41_FirstMissingPositive no41 = new No41_FirstMissingPositive();
+		No041_FirstMissingPositive no41 = new No041_FirstMissingPositive();
 
 		int[] nums = { 1, 2, 0, 1 };
 		System.out.println(no41.firstMissingPositive(nums));

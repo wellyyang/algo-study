@@ -8,7 +8,7 @@ import java.util.List;
  * @author yangchuan02
  * @date 2019年5月16日
  */
-public class No15_3Sum {
+public class No015_3Sum {
 
 	public List<List<Integer>> threeSum(int[] nums) {
 		int[] temp = Arrays.copyOf(nums, nums.length);
@@ -45,7 +45,7 @@ public class No15_3Sum {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new No15_3Sum().threeSum(new int[] { -1, 0, 1, 2, -1, -4 }));
+		System.out.println(new No015_3Sum().threeSum(new int[] { -1, 0, 1, 2, -1, -4 }));
 	}
 
 }

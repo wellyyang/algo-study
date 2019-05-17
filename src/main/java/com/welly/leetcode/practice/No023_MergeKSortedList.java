@@ -8,7 +8,7 @@ import com.welly.leetcode.def.ListNode;
  * @author yangchuan02
  * @date 2019年5月16日
  */
-public class No23_MergeKSortedList {
+public class No023_MergeKSortedList {
 
 	public ListNode mergeKLists(ListNode[] lists) {
 		PriorityQueue<ListNode> pq = new PriorityQueue<>((n1, n2) -> Integer.compare(n1.val, n2.val));
@@ -76,13 +76,13 @@ public class No23_MergeKSortedList {
 		lists[0] = buildListNode(1, 4, 5);
 		lists[1] = buildListNode(1, 3, 4);
 		lists[2] = buildListNode(2, 6);
-		System.out.println(new No23_MergeKSortedList().mergeKLists(lists));
+		System.out.println(new No023_MergeKSortedList().mergeKLists(lists));
 
 		lists = new ListNode[3];
 		lists[0] = buildListNode(1, 4, 5);
 		lists[1] = buildListNode(1, 3, 4);
 		lists[2] = buildListNode(2, 6);
-		System.out.println(new No23_MergeKSortedList().mergeKLists2(lists));
+		System.out.println(new No023_MergeKSortedList().mergeKLists2(lists));
 	}
 
 	private static ListNode buildListNode(int... vals) {
