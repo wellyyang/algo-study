@@ -106,6 +106,7 @@ public class No641_CircularDeque {
 		System.out.println(circularDeque.deleteLast()); // return true
 		System.out.println(circularDeque.insertFront(4)); // return true
 		System.out.println(circularDeque.getFront()); // return 4
+		System.out.println(circularDeque.deleteFront()); // return true
 	}
 
 }
