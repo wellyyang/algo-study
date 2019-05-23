@@ -15,12 +15,4 @@ package com.welly.algo.datastruct;
  */
 public class RedBlackTree {
 
-	private RedBlackTreeNode root;
-
-	private static final boolean BLACK = true;
-
-	private static final boolean RED = false;
-
-	// TODO
-
 }
