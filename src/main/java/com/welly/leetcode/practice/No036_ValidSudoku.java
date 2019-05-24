@@ -14,6 +14,9 @@ public class No036_ValidSudoku {
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[0].length; j++) {
 				char c = board[i][j];
+				if (c == '.') {
+					continue;
+				}
 				if (!found.add("row-" + i + "-num-" + c)
 						|| !found.add("col-" + j + "-num-" + c)
 						|| !found.add("block-" + i / 3 + "-" + j / 3 + "-" + c)) {
